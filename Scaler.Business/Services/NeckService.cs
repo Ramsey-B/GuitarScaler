@@ -34,19 +34,20 @@ namespace Scaler.Business.Services
         public NeckString GetAllNotesOfString(NeckString root)
         {
             var notes = _noteRepository.GetAll();
-            var rootIdex = notes.IndexOf(n => n.Name == root.RootNote);
+            var rootIndex = notes.IndexOf(n => n.Name == root.RootNote);
             var fretNum = 0;
             var notesOfString = new List<NotePosition>();
-            notes.ForEach(rootIdex, _fretCount, note =>
+            for (int i = rootIndex; i < _fretCount + rootIndex && fretNum <= _fretCount; i++)
             {
-                notesOfString.Add(new NotePosition(note.Name, fretNum));
+                var note = notes[i];
+                notesOfString.Add(new NotePosition($" {note.Name}", fretNum));
                 fretNum++;
-                if (note.IntervalToNext == 2)
+                if (note.IntervalToNext == 2 && fretNum < _fretCount)
                 {
-                    notesOfString.Add(new NotePosition($"{note.Name}#", fretNum));
+                    notesOfString.Add(new NotePosition($" {note.Name}#", fretNum));
                     fretNum++;
                 }
-            });
+            }
             root.Notes = notesOfString;
             return root;
         }
