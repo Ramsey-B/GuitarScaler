@@ -1,4 +1,5 @@
-﻿using Scaler.Core.Enum;
+﻿using Scaler.Business.Interfaces;
+using Scaler.Core.Enum;
 using Scaler.Core.Models;
 using Scaler.Data.Interfaces;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Scaler.Business.Services
 {
-    public class NeckService
+    public class NeckService : INeckService
     {
         private readonly INoteRepository _noteRepository;
         private readonly ITuningRepository _tuningRepository;
