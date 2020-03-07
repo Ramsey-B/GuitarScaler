@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Scaler.Data\Scaler.Data.csproj" />
+    <ProjectReference Include="..\Scaler.Core\Scaler.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,7 +10,7 @@ namespace Scaler.ViewModels
     {
         static ViewModelLocator()
         {
-            BootStrap.Initialize();
+            Startup.Startup.Initialize();
         }
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();

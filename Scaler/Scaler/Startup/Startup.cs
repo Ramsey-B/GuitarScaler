@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Scaler.Startup
 {
-    public sealed class BootStrap
+    public sealed class Startup
     {
         public static void Initialize()
         {
