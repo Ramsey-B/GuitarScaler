@@ -9,12 +9,13 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Entry x:Name="chord" Placeholder="Enter a Chord"/>
+        <!--<Entry x:Name="chord" Placeholder="Enter a Chord"/>
         <Button 
             Command="{Binding ChordNotesCommand}"
             CommandParameter="{Binding Source={x:Reference Name=chord}, Path=Text}"
-            Text="Get Notes"/>
-        <Label Text="{Binding DisplayNotes}"/>
+            Text="Get Notes"/> -->
+        <Button Command="{Binding GetNeckNotesCommand}" Text="Get Notes"/>
+        <Label Text="{Binding DisplaySixthString}"/>
     </StackLayout>
 
 </ContentPage>
