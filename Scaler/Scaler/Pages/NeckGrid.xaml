@@ -6,10 +6,6 @@
              mc:Ignorable="d"
              x:Class="Scaler.Pages.NeckGrid">
   <ContentView.Content>
-        <StackLayout>
-            <Label Text="This is a sub-view"></Label>
-            <Label Text="{ Binding NeckNotes }"></Label>
-        </StackLayout>
-        <!--<Grid x:Name="neckLayout"></Grid>-->
-  </ContentView.Content>
+        <Grid x:Name="neckLayout"></Grid>
+    </ContentView.Content>
 </ContentView>

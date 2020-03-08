@@ -15,7 +15,8 @@
             Command="{Binding ChordNotesCommand}"
             CommandParameter="{Binding Source={x:Reference Name=chord}, Path=Text}"
             Text="Get Notes"/> -->
-        <views:NeckGrid NeckNotes="Test"/>
+        <views:NeckGrid NeckStrings="{Binding DisplayStrings}"/>
+        <Label Text="{Binding DisplayStrings}"></Label>
         <!--<Button Command="{Binding GetNeckNotesCommand}" Text="Get Notes"/>
         <Label Text="{Binding DisplayStrings.Header}" FontSize="Medium"/>
         <Label Text="{Binding DisplayStrings.Sixth}" FontSize="Medium"/>

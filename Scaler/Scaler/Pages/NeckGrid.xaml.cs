@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scaler.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,56 +13,65 @@ namespace Scaler.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NeckGrid : ContentView
     {
-        private int fretCount = 22;
-        private int stringCount = 6;
-
         public NeckGrid()
         {
-            BindingContext = this;
+            //BindingContext = this;
             InitializeComponent();
             //BuildColumns();
             //BuildRows();
         }
 
-        public string NeckNotes
+        public IEnumerable<NeckString> NeckStrings
         {
             get 
             { 
-                var test = (string)GetValue(NeckNotesProperty);
-                return test;
+                return (IEnumerable<NeckString>)GetValue(NeckStringsProperty);
             }
             set 
             { 
-                SetValue(NeckNotesProperty, value); 
+                SetValue(NeckStringsProperty, value);
+                BuildColumns();
+                BuildRows();
             }
         }
 
-        public static readonly BindableProperty NeckNotesProperty =
-            BindableProperty.Create(nameof(NeckNotes), typeof(string), typeof(NeckGrid), "Default");
+        public static readonly BindableProperty NeckStringsProperty =
+            BindableProperty.Create(
+                nameof(NeckStrings), 
+                typeof(IEnumerable<NeckString>), 
+                typeof(NeckGrid), 
+                new List<NeckString>(), 
+                BindingMode.TwoWay,
+                propertyChanged: (b, o, n) =>
+                {
+                    var ctrl = (NeckGrid)b;
+                    ctrl.NeckStrings = (IEnumerable<NeckString>)n;
+                });
 
-        //private void BuildColumns()
-        //{
-        //    for (int i = 0; i < fretCount + 1; i++)
-        //    {
-        //        neckLayout.ColumnDefinitions.Add(new ColumnDefinition());
-        //        var label = new Label
-        //        {
-        //            Text = i == 0 ? "  " : $" {i} ",
-        //            VerticalOptions = LayoutOptions.Center,
-        //            HorizontalOptions = LayoutOptions.Center,
-        //            TextDecorations = TextDecorations.Underline,
-        //            FontSize = 16
-        //        };
-        //        neckLayout.Children.Add(label, i, 0);
-        //    }
-        //}
+        private void BuildColumns()
+        {
+            var fretCount = NeckStrings.FirstOrDefault()?.Notes.Count() ?? 0;
+            for (int i = 0; i < fretCount; i++)
+            {
+                neckLayout.ColumnDefinitions.Add(new ColumnDefinition());
+                var label = new Label
+                {
+                    Text = i == 0 ? "  " : $" {i} ",
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.Center,
+                    TextDecorations = TextDecorations.Underline,
+                    FontSize = 16
+                };
+                neckLayout.Children.Add(label, i, 0);
+            }
+        }
 
-        //private void BuildRows()
-        //{
-        //    for (int i = 0; i < stringCount; i++)
-        //    {
-        //        neckLayout.RowDefinitions.Add(new RowDefinition());
-        //    }
-        //}
+        private void BuildRows()
+        {
+            for (int i = 0; i < NeckStrings.Count(); i++)
+            {
+                neckLayout.RowDefinitions.Add(new RowDefinition());
+            }
+        }
     }
 }
