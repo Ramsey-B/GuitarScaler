@@ -21,4 +21,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Scaler.Business\Scaler.Business.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Pages\NeckGrid.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

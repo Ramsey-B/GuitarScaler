@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:views="clr-namespace:Scaler.Pages"
              BindingContext="{Binding MainViewModel, Source={StaticResource Locator}}"
              mc:Ignorable="d"
              x:Class="Scaler.MainPage">
@@ -14,8 +15,15 @@
             Command="{Binding ChordNotesCommand}"
             CommandParameter="{Binding Source={x:Reference Name=chord}, Path=Text}"
             Text="Get Notes"/> -->
-        <Button Command="{Binding GetNeckNotesCommand}" Text="Get Notes"/>
-        <Label Text="{Binding DisplaySixthString}"/>
+        <views:NeckGrid NeckNotes="Test"/>
+        <!--<Button Command="{Binding GetNeckNotesCommand}" Text="Get Notes"/>
+        <Label Text="{Binding DisplayStrings.Header}" FontSize="Medium"/>
+        <Label Text="{Binding DisplayStrings.Sixth}" FontSize="Medium"/>
+        <Label Text="{Binding DisplayStrings.Fifth}" FontSize="Medium"/>
+        <Label Text="{Binding DisplayStrings.Forth}" FontSize="Medium"/>
+        <Label Text="{Binding DisplayStrings.Third}" FontSize="Medium"/>
+        <Label Text="{Binding DisplayStrings.Second}" FontSize="Medium"/>
+        <Label Text="{Binding DisplayStrings.First}" FontSize="Medium" TextDecorations="Underline"/>-->
     </StackLayout>
 
 </ContentPage>

@@ -13,6 +13,11 @@ namespace Scaler
     {
         private readonly INeckService _neckService;
         private string notesOfSixthString = string.Empty;
+        private DisplayNeck strings = new DisplayNeck 
+        { 
+            Sixth = string.Empty,
+            Fifth = string.Empty
+        };
         public MainViewModel(INeckService neckService)
         {
             _neckService = neckService;
@@ -20,8 +25,7 @@ namespace Scaler
         }
 
         public ICommand GetNeckNotesCommand { get; }
-
-        public string DisplaySixthString => $"{notesOfSixthString}";
+        public DisplayNeck DisplayStrings => strings;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -38,13 +42,28 @@ namespace Scaler
                 switch (neckString.String)
                 {
                     case 6:
-                        notesOfSixthString = NotesToString(neckString);
+                        strings.Sixth = NotesToString(neckString);
+                        break;
+                    case 5:
+                        strings.Fifth = NotesToString(neckString);
+                        break;
+                    case 4:
+                        strings.Forth = NotesToString(neckString);
+                        break;
+                    case 3:
+                        strings.Third = NotesToString(neckString);
+                        break;
+                    case 2:
+                        strings.Second = NotesToString(neckString);
+                        break;
+                    case 1:
+                        strings.First = NotesToString(neckString);
                         break;
                     default:
                         break;
                 }
             }
-            OnPropertyChanged(nameof(DisplaySixthString));
+            OnPropertyChanged(nameof(DisplayStrings));
         }
 
         private string NotesToString(NeckString neckString)
@@ -55,6 +74,28 @@ namespace Scaler
                 notesAsString.Append($"{note.Note} |");
             }
             return notesAsString.ToString();
+        }
+    }
+
+    public class DisplayNeck
+    {
+        private int fretCount = 22;
+        public string Header => GetHeader();
+        public string Sixth { get; set; }
+        public string Fifth { get; set; }
+        public string Forth { get; set; }
+        public string Third { get; set; }
+        public string Second { get; set; }
+        public string First { get; set; }
+
+        private string GetHeader()
+        {
+            var header = new StringBuilder("* |");
+            for (int i = 0; i < fretCount; i++)
+            {
+                header.Append($" {i + 1} |");
+            }
+            return header.ToString();
         }
     }
 }
