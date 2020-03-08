@@ -30,8 +30,7 @@ namespace Scaler.Pages
             set 
             { 
                 SetValue(NeckStringsProperty, value);
-                BuildColumns();
-                BuildRows();
+                BuildNeck();
             }
         }
 
@@ -48,29 +47,67 @@ namespace Scaler.Pages
                     ctrl.NeckStrings = (IEnumerable<NeckString>)n;
                 });
 
+        private void BuildNeck()
+        {
+            BuildColumns();
+            BuildRows();
+            AddHeaders();
+            FillStrings();
+        }
+
         private void BuildColumns()
         {
             var fretCount = NeckStrings.FirstOrDefault()?.Notes.Count() ?? 0;
             for (int i = 0; i < fretCount; i++)
             {
                 neckLayout.ColumnDefinitions.Add(new ColumnDefinition());
-                var label = new Label
-                {
-                    Text = i == 0 ? "  " : $" {i} ",
-                    VerticalOptions = LayoutOptions.Center,
-                    HorizontalOptions = LayoutOptions.Center,
-                    TextDecorations = TextDecorations.Underline,
-                    FontSize = 16
-                };
-                neckLayout.Children.Add(label, i, 0);
             }
         }
 
         private void BuildRows()
         {
-            for (int i = 0; i < NeckStrings.Count(); i++)
+            for (int i = 0; i < NeckStrings.Count() + 1; i++)
             {
                 neckLayout.RowDefinitions.Add(new RowDefinition());
+            }
+        }
+
+        private void AddHeaders()
+        {
+            for (int i = 0; i < neckLayout.ColumnDefinitions.Count; i++)
+            {
+                var frame = new Frame
+                {
+                    BorderColor = Color.Black,
+                    Padding = 0,
+                    Margin = 0
+                };
+                frame.Content = new Label { Text = $" {i} ", TextColor = Color.Black, FontSize = 16, HorizontalTextAlignment = TextAlignment.Center };
+                neckLayout.Children.Add(frame, i, 0);
+            }
+        }
+
+        private void FillStrings()
+        {
+            for (int i = 0; i < NeckStrings.Count(); i++)
+            {
+                var neckString = NeckStrings.ElementAt(i);
+                AddNotes(neckString);
+            }
+        }
+
+        private void AddNotes(NeckString neckString)
+        {
+            foreach (var note in neckString.Notes)
+            {
+                var frame = new Frame
+                {
+                    BorderColor = Color.Black,
+                    Padding = 0,
+                    Margin = 0
+                };
+                frame.Content = new Label { Text = $" {note.Note} ", TextColor = Color.Black, FontSize = 16, HorizontalTextAlignment = TextAlignment.Center };
+                neckLayout.Children.Add(frame, note.Fret, neckString.String);
             }
         }
     }

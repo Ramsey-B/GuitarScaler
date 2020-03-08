@@ -6,6 +6,6 @@
              mc:Ignorable="d"
              x:Class="Scaler.Pages.NeckGrid">
   <ContentView.Content>
-        <Grid x:Name="neckLayout"></Grid>
+        <Grid x:Name="neckLayout" BackgroundColor="Silver"></Grid>
     </ContentView.Content>
 </ContentView>

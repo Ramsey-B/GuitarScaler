@@ -16,15 +16,7 @@
             CommandParameter="{Binding Source={x:Reference Name=chord}, Path=Text}"
             Text="Get Notes"/> -->
         <views:NeckGrid NeckStrings="{Binding DisplayStrings}"/>
-        <Label Text="{Binding DisplayStrings}"></Label>
-        <!--<Button Command="{Binding GetNeckNotesCommand}" Text="Get Notes"/>
-        <Label Text="{Binding DisplayStrings.Header}" FontSize="Medium"/>
-        <Label Text="{Binding DisplayStrings.Sixth}" FontSize="Medium"/>
-        <Label Text="{Binding DisplayStrings.Fifth}" FontSize="Medium"/>
-        <Label Text="{Binding DisplayStrings.Forth}" FontSize="Medium"/>
-        <Label Text="{Binding DisplayStrings.Third}" FontSize="Medium"/>
-        <Label Text="{Binding DisplayStrings.Second}" FontSize="Medium"/>
-        <Label Text="{Binding DisplayStrings.First}" FontSize="Medium" TextDecorations="Underline"/>-->
+
     </StackLayout>
 
 </ContentPage>
