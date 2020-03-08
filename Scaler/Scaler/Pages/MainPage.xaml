@@ -15,7 +15,7 @@
             Command="{Binding ChordNotesCommand}"
             CommandParameter="{Binding Source={x:Reference Name=chord}, Path=Text}"
             Text="Get Notes"/> -->
-        <views:NeckGrid NeckStrings="{Binding DisplayStrings}"/>
+        <views:NeckGrid NeckStrings="{Binding DisplayStrings}" HeightRequest="300"/>
 
     </StackLayout>
 

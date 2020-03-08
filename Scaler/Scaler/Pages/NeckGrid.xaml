@@ -5,7 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Scaler.Pages.NeckGrid">
-  <ContentView.Content>
-        <Grid x:Name="neckLayout" BackgroundColor="Silver"></Grid>
+    <ContentView.Content>
+        <ScrollView Orientation="Horizontal">
+            <Grid x:Name="neckLayout" BackgroundColor="Silver" RowSpacing="0"></Grid>
+        </ScrollView>
     </ContentView.Content>
 </ContentView>

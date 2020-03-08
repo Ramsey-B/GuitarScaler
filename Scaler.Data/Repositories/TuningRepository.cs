@@ -11,12 +11,12 @@ namespace Scaler.Data.Repositories
     {
         private readonly IEnumerable<NeckString> EStandardTuning = new List<NeckString>()
         {
-            new NeckString(6, "E"),
-            new NeckString(5, "A"),
-            new NeckString(4, "D"),
-            new NeckString(3, "G"),
-            new NeckString(2, "B"),
             new NeckString(1, "E"),
+            new NeckString(2, "A"),
+            new NeckString(3, "D"),
+            new NeckString(4, "G"),
+            new NeckString(5, "B"),
+            new NeckString(6, "E"),
         };
 
         public IEnumerable<NeckString> GetTuning(Tuning tuning)

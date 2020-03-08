@@ -13,6 +13,8 @@ namespace Scaler.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NeckGrid : ContentView
     {
+        private const double fretSpaceConst = 17.817;
+        private const double firstFretWidth = 65;
         public NeckGrid()
         {
             //BindingContext = this;
@@ -57,10 +59,23 @@ namespace Scaler.Pages
 
         private void BuildColumns()
         {
+            var totalLength = fretSpaceConst * firstFretWidth;
             var fretCount = NeckStrings.FirstOrDefault()?.Notes.Count() ?? 0;
             for (int i = 0; i < fretCount; i++)
             {
-                neckLayout.ColumnDefinitions.Add(new ColumnDefinition());
+                var columnDef = new ColumnDefinition();
+                if (i != 0)
+                {
+                    var columnWidth = Math.Floor(totalLength / fretSpaceConst);
+                    columnDef.Width = new GridLength(columnWidth);
+                    totalLength -= columnWidth;
+                }
+                else
+                {
+                    columnDef.Width = new GridLength(25);
+                }
+
+                neckLayout.ColumnDefinitions.Add(columnDef);
             }
         }
 
@@ -82,7 +97,7 @@ namespace Scaler.Pages
                     Padding = 0,
                     Margin = 0
                 };
-                frame.Content = new Label { Text = $" {i} ", TextColor = Color.Black, FontSize = 16, HorizontalTextAlignment = TextAlignment.Center };
+                frame.Content = new Label { Text = $" {i} ", TextColor = Color.Black, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center };
                 neckLayout.Children.Add(frame, i, 0);
             }
         }
@@ -104,9 +119,10 @@ namespace Scaler.Pages
                 {
                     BorderColor = Color.Black,
                     Padding = 0,
-                    Margin = 0
+                    Margin = 0,
+                    BackgroundColor = Color.LightGreen
                 };
-                frame.Content = new Label { Text = $" {note.Note} ", TextColor = Color.Black, FontSize = 16, HorizontalTextAlignment = TextAlignment.Center };
+                frame.Content = new Label { Text = $" {note.Note} ", TextColor = Color.Black, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center };
                 neckLayout.Children.Add(frame, note.Fret, neckString.String);
             }
         }
