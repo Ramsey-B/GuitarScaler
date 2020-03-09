@@ -8,6 +8,7 @@ namespace Scaler.Core.Models
     {
         public string Note { get; set; }
         public int Fret { get; set; }
+        public int Set { get; set; } = 0;
 
         public NotePosition()
         {

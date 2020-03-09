@@ -8,13 +8,18 @@ namespace Scaler.Data.Repositories
     {
         private readonly CyclicalList<Note> notes = new CyclicalList<Note>()
         {
-            new Note("A", 2, "B"),
+            new Note("A", 1, "A#"),
+            new Note("A#", 1, "B"),
             new Note("B", 1, "C"),
-            new Note("C", 2, "D"),
-            new Note("D", 2, "E"),
+            new Note("C", 1, "C#"),
+            new Note("C#", 1, "D"),
+            new Note("D", 1, "D#"),
+            new Note("D#", 1, "E"),
             new Note("E", 1, "F"),
-            new Note("F", 2, "G"),
-            new Note("G", 2, "B")
+            new Note("F", 1, "F#"),
+            new Note("F#", 1, "G"),
+            new Note("G", 1, "G#"),
+            new Note("G#", 1, "A"),
         };
 
         public CyclicalList<Note> GetAll()
@@ -26,11 +31,11 @@ namespace Scaler.Data.Repositories
         {
             var reorderedList = new CyclicalList<Note>();
 
-            var rootNote = Get(root);
-            reorderedList.Add(rootNote);
-            for (int i = 0; i < notes.Count; i++)
+            var rootNoteIndex = notes.IndexOf(n => n.Name == root);
+            for (int i = rootNoteIndex; i < notes.Count + rootNoteIndex; i++)
             {
-
+                var note = notes[i];
+                reorderedList.Add(note);
             }
 
             return reorderedList;

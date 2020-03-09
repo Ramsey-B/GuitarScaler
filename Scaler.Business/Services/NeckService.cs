@@ -42,11 +42,6 @@ namespace Scaler.Business.Services
                 var note = notes[i];
                 notesOfString.Add(new NotePosition($" {note.Name}", fretNum));
                 fretNum++;
-                if (note.IntervalToNext == 2 && fretNum < _fretCount)
-                {
-                    notesOfString.Add(new NotePosition($" {note.Name}#", fretNum));
-                    fretNum++;
-                }
             }
             root.Notes = notesOfString;
             return root;
