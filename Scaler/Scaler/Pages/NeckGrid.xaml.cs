@@ -122,7 +122,12 @@ namespace Scaler.Pages
                     Margin = 0,
                     BackgroundColor = Color.LightGreen
                 };
-                frame.Content = new Label { Text = $" {note.Note} ", TextColor = Color.Black, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center };
+                var label = new Label { Text = $" {note.Note} ", TextColor = Color.Black, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center };
+                if (note.Set == 1)
+                {
+                    label.BackgroundColor = Color.Red;
+                }
+                frame.Content = label;
                 neckLayout.Children.Add(frame, note.Fret, neckString.String);
             }
         }
