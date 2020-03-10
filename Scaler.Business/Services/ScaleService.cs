@@ -4,6 +4,7 @@ using Scaler.Core.Models;
 using Scaler.Data.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Scaler.Business.Services
@@ -11,26 +12,26 @@ namespace Scaler.Business.Services
     public class ScaleService : IScaleService
     {
         private readonly IScaleRepository _scaleRepository;
-        private readonly INoteRepository _noteRepository;
 
-        public ScaleService(IScaleRepository scaleRepository, INoteRepository noteRepository)
+        public ScaleService(IScaleRepository scaleRepository)
         {
             _scaleRepository = scaleRepository;
-            _noteRepository = noteRepository;
         }
 
-        public IEnumerable<Note> GetNotesOfScale(string key, Scale scale)
+        public IEnumerable<NeckString> AddScale(string key, ScaleName scale, IEnumerable<NeckString> neckStrings)
         {
-            var notes = _noteRepository.GetAll(key);
-            var intervals = _scaleRepository.GetIntervals(scale);
-            var scaleNotes = new List<Note>();
-            var index = 0;
-            for (int i = 0; i < intervals.Length; i++)
+            var scaleNotes = _scaleRepository.GetNotesOfScale(key, scale);
+            foreach (var neckString in neckStrings)
             {
-                scaleNotes.Add(notes[index]);
-                index += intervals[i];
+                foreach (var stringNote in neckString.Notes)
+                {
+                    if (scaleNotes.Any(n => n.Name == stringNote.Note.Trim()))
+                    {
+                        stringNote.Set = (int)scale; // Only displays 1 scale at a time.
+                    }
+                }
             }
-            return scaleNotes;
+            return neckStrings;
         }
     }
 }

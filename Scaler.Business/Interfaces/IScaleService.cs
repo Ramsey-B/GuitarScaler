@@ -8,6 +8,6 @@ namespace Scaler.Business.Interfaces
 {
     public interface IScaleService
     {
-        IEnumerable<Note> GetNotesOfScale(string key, Scale scale);
+        IEnumerable<NeckString> AddScale(string key, ScaleName scale, IEnumerable<NeckString> neckStrings);
     }
 }

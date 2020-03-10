@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Scaler.Core.Enum
 {
-    public enum Scale
+    public enum ScaleName
     {
-        Major,
-        minor,
-        pentatonic
+        Major = 1,
+        minor = 2,
+        pentatonic = 3
     }
 }

@@ -41,8 +41,8 @@ namespace Scaler.Startup
         private static void RegisterServices(ref ContainerBuilder containerBuilder)
         {
             containerBuilder.RegisterType<ChordService>().As<IChordService>().SingleInstance();
-            containerBuilder.RegisterType<ScaleService>().As<IScaleService>().SingleInstance();
             containerBuilder.RegisterType<NeckService>().As<INeckService>().SingleInstance();
+            containerBuilder.RegisterType<ScaleService>().As<IScaleService>().SingleInstance();
         }
 
         private static void RegisterRepositories(ref ContainerBuilder containerBuilder)

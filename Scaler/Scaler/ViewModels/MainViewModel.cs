@@ -25,7 +25,7 @@ namespace Scaler
         }
 
         public ICommand GetNeckNotesCommand { get; }
-        public List<NeckString> DisplayStrings { get; private set; }
+        public IEnumerable<NeckString> DisplayStrings { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -34,26 +34,16 @@ namespace Scaler
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        private void SetScale(string key, Scale scale)
+        private void SetScale(string key, ScaleName scale)
         {
-            var scaleNotes = _scaleService.GetNotesOfScale(key, scale).ToList();
-            foreach (var neckString in DisplayStrings)
-            {
-                foreach (var stringNote in neckString.Notes)
-                {
-                    if (scaleNotes.Any(n => n.Name == stringNote.Note.Trim()))
-                    {
-                        stringNote.Set = 1; // Only displays 1 scale at a time.
-                    }
-                }
-            }
+            DisplayStrings = _scaleService.AddScale(key, scale, DisplayStrings);
         }
 
         private void GetNoteOfNeck()
         {
             DisplayStrings = _neckService.GetAllNotesOfNeck(Core.Enum.Tuning.EStandard).ToList(); // Dont hardcode the tuning...
 
-            SetScale("F", Scale.Major);
+            SetScale("F", ScaleName.Major);
             OnPropertyChanged(nameof(DisplayStrings));
         }
     }

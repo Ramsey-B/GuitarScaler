@@ -125,6 +125,7 @@ namespace Scaler.Pages
                 var label = new Label { Text = $" {note.Note} ", TextColor = Color.Black, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center };
                 if (note.Set == 1)
                 {
+                    
                     label.BackgroundColor = Color.Red;
                 }
                 frame.Content = label;

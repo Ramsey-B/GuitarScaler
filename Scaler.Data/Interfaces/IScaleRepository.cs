@@ -1,12 +1,12 @@
 ﻿using Scaler.Core.Enum;
-using System;
+using Scaler.Core.Models;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Scaler.Data.Interfaces
 {
     public interface IScaleRepository
     {
-        int[] GetIntervals(Scale scale);
+        IEnumerable<Note> GetNotesOfScale(string key, ScaleName scale);
+        Scale Get(ScaleName scaleName);
     }
 }
