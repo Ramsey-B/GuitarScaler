@@ -15,6 +15,12 @@ namespace Scaler.Pages
     {
         private const double fretSpaceConst = 17.817;
         private const double firstFretWidth = 65;
+        private static Dictionary<int, Color> setColors = new Dictionary<int, Color>()
+        {
+            { 1, Color.Red },
+            { 2, Color.Blue }
+        };
+
         public NeckGrid()
         {
             //BindingContext = this;
@@ -51,6 +57,9 @@ namespace Scaler.Pages
 
         private void BuildNeck()
         {
+            neckLayout.ColumnDefinitions.Clear();
+            neckLayout.RowDefinitions.Clear();
+            neckLayout.Children.Clear();
             BuildColumns();
             BuildRows();
             AddHeaders();
@@ -122,13 +131,17 @@ namespace Scaler.Pages
                     Margin = 0,
                     BackgroundColor = Color.LightGreen
                 };
+                var innerFrame = new Frame { BackgroundColor = Color.Transparent, Padding = 0, Margin = 0 };
                 var label = new Label { Text = $" {note.Note} ", TextColor = Color.Black, FontSize = 20, HorizontalTextAlignment = TextAlignment.Center, VerticalTextAlignment = TextAlignment.Center };
-                if (note.Set == 1)
+                if (note.Set != 0 && setColors.ContainsKey(note.Set))
                 {
-                    
-                    label.BackgroundColor = Color.Red;
+                    innerFrame.BackgroundColor = setColors[note.Set];
+                    innerFrame.CornerRadius = 120;
+                    innerFrame.Opacity = 0.7;
+                    label.TextColor = Color.White;
                 }
-                frame.Content = label;
+                innerFrame.Content = label;
+                frame.Content = innerFrame;
                 neckLayout.Children.Add(frame, note.Fret, neckString.String);
             }
         }

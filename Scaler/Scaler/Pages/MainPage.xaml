@@ -15,6 +15,10 @@
             Command="{Binding ChordNotesCommand}"
             CommandParameter="{Binding Source={x:Reference Name=chord}, Path=Text}"
             Text="Get Notes"/> -->
+        <Picker Title="--Select a Scale--"
+                ItemsSource="{Binding Scales}"
+                SelectedItem="{Binding SelectedScale}"></Picker>
+        <Entry Text="{Binding SelectedKey}" Placeholder="Enter a Key"/>
         <views:NeckGrid NeckStrings="{Binding DisplayStrings}" HeightRequest="300"/>
 
     </StackLayout>
