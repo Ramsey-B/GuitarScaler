@@ -14,7 +14,7 @@ namespace Scaler.Pages
     public partial class NeckGrid : ContentView
     {
         private const double fretSpaceConst = 17.817;
-        private const double firstFretWidth = 65;
+        private const double firstFretWidth = 80;
         private static Dictionary<int, Color> setColors = new Dictionary<int, Color>()
         {
             { 1, Color.Red },
@@ -81,7 +81,7 @@ namespace Scaler.Pages
                 }
                 else
                 {
-                    columnDef.Width = new GridLength(25);
+                    columnDef.Width = new GridLength(25); // Sets the open string column width
                 }
 
                 neckLayout.ColumnDefinitions.Add(columnDef);

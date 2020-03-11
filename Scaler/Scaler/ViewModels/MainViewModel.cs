@@ -5,9 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using Xamarin.Forms;
 
 namespace Scaler
 {
@@ -57,8 +54,7 @@ namespace Scaler
         {
             if (SelectedScale > 0 && !string.IsNullOrWhiteSpace(SelectedKey))
             {
-                GetNoteOfNeck();
-                DisplayStrings = _scaleService.AddScale(SelectedKey, SelectedScale, DisplayStrings);
+                DisplayStrings = _scaleService.AddScale(SelectedKey, SelectedScale, Tuning.EStandard);
                 OnPropertyChanged(nameof(DisplayStrings));
             }
         }
@@ -66,7 +62,7 @@ namespace Scaler
         private void GetNoteOfNeck()
         {
             DisplayStrings = _neckService.GetAllNotesOfNeck(Tuning.EStandard); // Dont hardcode the tuning...
-            //OnPropertyChanged(nameof(DisplayStrings));
+            OnPropertyChanged(nameof(DisplayStrings));
         }
     }
 }
