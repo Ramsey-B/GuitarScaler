@@ -4,9 +4,9 @@ using System;
 
 namespace Scaler.Business.Handlers
 {
-    public sealed class ExceptionHandler : IExceptionHandler
+    public static class ExceptionHandler 
     {
-        public string GenerateUserFriendlyMessage(Exception exception)
+        public static string GenerateUserFriendlyMessage(Exception exception)
         {
             switch (exception)
             {

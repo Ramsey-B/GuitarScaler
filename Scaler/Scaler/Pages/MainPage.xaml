@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:views="clr-namespace:Scaler.Pages"
+             xmlns:pages="clr-namespace:Scaler.Pages"
+             xmlns:behavior="clr-namespace:Scaler.Behaviors"
              BindingContext="{Binding MainViewModel, Source={StaticResource Locator}}"
              mc:Ignorable="d"
              x:Class="Scaler.MainPage">
@@ -18,8 +19,12 @@
         <Picker Title="--Select a Scale--"
                 ItemsSource="{Binding Scales}"
                 SelectedItem="{Binding SelectedScale}"></Picker>
-        <Entry Text="{Binding SelectedKey}" Placeholder="Enter a Key"/>
-        <views:NeckGrid NeckStrings="{Binding DisplayStrings}" HeightRequest="300"/>
+        <Entry Text="{Binding SelectedKey}" Placeholder="Enter a Key">
+            <Entry.Behaviors>
+                <behavior:TextSanitizer RegexInput="[^A-z#]"/>
+            </Entry.Behaviors>
+        </Entry>
+        <pages:NeckGrid NeckStrings="{Binding DisplayStrings}" HeightRequest="300"/>
 
     </StackLayout>
 
